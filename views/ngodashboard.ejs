@@ -1,0 +1,611 @@
+[7:12 AM, 4/30/2023] Uday NU: <!DOCTYPE html>
+<!-- === Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- ===== CSS ===== -->
+    <style>
+        /* ===== Google Font Import - Poformsins ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(#fff, #ffd6d6);
+        }
+
+        .container {
+            position: relative;
+            max-width: 430px;
+            width: 100%;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 0 20px;
+
+        }
+
+        .container .forms {
+            display: flex;
+            align-items: center;
+            height: 440px;
+            width: 200%;
+            transition: height 0.2s ease;
+
+        }
+
+
+        .container .form {
+            width: 50%;
+            padding: 30px;
+            background-color: #fff;
+            transition: margin-left 0.18s ease;
+        }
+
+        .container.active .login {
+            margin-left: -50%;
+            opacity: 0;
+            transition: margin-left 0.18s ease, opacity 0.15s ease;
+        }
+
+        .container .signup {
+            opacity: 0;
+            transition: opacity 0.09s ease;
+        }
+
+        .container.active .signup {
+            opacity: 1;
+            transition: opacity 0.2s ease;
+        }
+
+        .container.active .forms {
+            height: auto;
+        }
+
+        .container .form .title {
+            position: relative;
+            font-size: 27px;
+            font-weight: 600;
+        }
+
+        .form .title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            background-color: #ff523b;
+            border-radius: 25px;
+        }
+
+        .form .input-field {
+            position: relative;
+            height: 50px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .input-field input {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            padding: 0 35px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            border-bottom: 2px solid #ccc;
+            border-top: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .input-field input:is(:focus, :valid) {
+            border-bottom-color: #ff523b;
+        }
+
+        .input-field i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 23px;
+            transition: all 0.2s ease;
+        }
+
+        .input-field input:is(:focus, :valid)~i {
+            color: #ff523b;
+        }
+
+        .input-field i.icon {
+            left: 0;
+        }
+
+        .input-field i.showHidePw {
+            right: 0;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .form .checkbox-text {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .checkbox-text .checkbox-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-content input {
+            margin-right: 10px;
+            accent-color: #ff523b;
+        }
+
+        .form .text {
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form a.text {
+            color: #ff523b;
+            text-decoration: none;
+        }
+
+        .form a:hover {
+            text-decoration: underline;
+        }
+
+        .form .button {
+            margin-top: 35px;
+        }
+
+        .form .button input {
+            border: none;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            background-color: #ff523b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button input:hover {
+            background-color: #ff1e00;
+        }
+
+        .form .login-signup {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+    </style>
+
+    <!--<title>Login & Registration Form</title>-->
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="forms">
+            <div class="form login">
+                <span class="title">Login</span>
+
+                <form action="/volunteer/login" method="POST">
+                    <div class="input-field">
+                        <input name="email" type="text" placeholder="Enter your email" required>
+                        <i class="uil uil-envelope icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input name="userpassword" type="password" class="password" placeholder="Enter your password"
+                            required>
+                        <i class="uil uil-lock icon"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i>
+                    </div>
+
+                    <div class="checkbox-text">
+                        <div class="checkbox-content">
+                            <input type="checkbox" id="logCheck">
+                            <label for="logCheck" class="text">Remember me</label>
+                        </div>
+
+                        <a href="#" class="text">Forgot password?</a>
+                    </div>
+
+                    <div class="input-field button">
+                        <input type="submit" value="Login">
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Not a member?
+                        <a href="#" class="text signup-link">Signup Now</a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="form signup">
+                <span class="title">Registration</span>
+
+                <form action="/volunteer/register" method="POST">
+                    <div class="input-field">
+                        <input name="username" type="text" placeholder="Enter your name" required>
+                        <i class="uil uil-user"></i>
+                    </div>
+                    <div class="input-field">
+                        <input name="email" type="text" placeholder="Enter your email" required>
+                        <i class="uil uil-envelope icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input name="dob" type="date" placeholder="DD-MM-YYYY" required>
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <div class="input-field">
+                        <input name="userpassword" type="password" class="password" placeholder="Create a password"
+                            required>
+                        <i class="uil uil-lock icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input name="confirmpassword" type="password" class="password" placeholder="Confirm a password"
+                            required>
+                        <i class="uil uil-lock icon"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i>
+                    </div>
+
+                    <div class="checkbox-text">
+                        <div class="checkbox-content">
+                            <input type="checkbox" id="termCon">
+                            <label for="termCon" class="text">I accepted all terms and conditions</label>
+                        </div>
+                    </div>
+
+                    <div class="input-field button">
+                        <input type="submit" value="Signup">
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Already a member?
+                        <a href="#" class="text login-link">Login Now</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<script src="script.js"></script>-->
+    <script>
+        const container = document.querySelector(".container"),
+            pwShowHide = document.querySelectorAll(".showHidePw"),
+            pwFields = document.querySelectorAll(".password"),
+            signUp = document.querySelector(".signup-link"),
+            login = document.querySelector(".login-link");
+
+        //   js code to show/hide password and change icon
+        pwShowHide.forEach(eyeIcon => {
+            eyeIcon.addEventListener("click", () => {
+                pwFields.forEach(pwField => {
+                    if (pwField.type === "password") {
+                        pwField.type = "text";
+
+                        pwShowHide.forEach(icon => {
+                            icon.classList.replace("uil-eye-slash", "uil-eye");
+                        })
+                    } else {
+                        pwField.type = "password";
+
+                        pwShowHide.forEach(icon => {
+                            icon.classList.replace("uil-eye", "uil-eye-slash");
+                        })
+                    }
+                })
+            })
+        })
+
+        // js code to appear signup and login form
+        signUp.addEventListener("click", () => {
+            container.classList.add("active");
+        });
+        login.addEventListener("click", () => {
+            container.classList.remove("active");
+        });
+
+    </script>
+</body>
+
+</html>
+[7:12 AM, 4/30/2023] Uday NU: Volunteer side login / sign up
+[7:12 AM, 4/30/2023] Uday NU: <!DOCTYPE html>
+<html>
+  <head>
+    <title>NGO Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .ngo-details {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .ngo-details h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      .ngo-details p {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .campaigns-container {
+        margin-top: 50px;
+      }
+
+      .campbtn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .campaigns-header h2 {
+        font-size: 26px;
+        margin-bottom: 20px;
+      }
+
+      .campaigns-header button {
+        font-size: 18px;
+        position: relative;
+        padding: 10px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .campaigns-cards {
+        display: flex;
+        /* justify-content: space-around; */
+        flex-wrap: wrap;
+      }
+
+      .card {
+        width: 28%;
+        border: 1px solid black;
+        margin: 20px;
+        /* margin-bottom: 20px; */
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .card img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .card h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        font-size: 18px;
+      }
+
+      .popup-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .popup {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+
+      .popup h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .popup label {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .popup input[type="text"],
+      .popup textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .popup button {
+        font-size: 18px;
+        padding: 10px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+
+      .popup button[type="submit"] {
+        margin-right: 0;
+      }
+
+      .popup button[type="button"] {
+        background-color: #ccc;
+      }
+
+      .popup label {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #333;
+        text-align: left;
+      }
+
+      .popup input[type="text"],
+      .popup textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .popup input[type="text"]:read-only {
+        background-color: #f8f8f8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ngo-details">
+      <h1>NGO Name</h1>
+      <p>Address: 123 Street, City, Country</p>
+      <p>Contact: +91-1234567890</p>
+      <p>Email: info@ngoname.org</p>
+    </div>
+    <br />
+    <hr />
+    <div class="campaigns-container">
+      <div class="campbtn">
+        <div class="campaigns-header">
+          <h2>Campaigns</h2>
+          <button id="add-campaign-btn">Add Campaign</button>
+        </div>
+      </div>
+      <div class="campaigns-cards"></div>
+    </div>
+    <div class="popup-container" id="popup-container">
+      <div class="popup">
+        <h2>Add Campaign</h2>
+        <form id="add-campaign-form" action="/ngo/login/campaigns" method="POST">
+         <label for="name">NGO Name : </label>
+         <input type="text" name="name" id="ngo-name">
+         <label for="date">Date :</label>
+         <input type="date" name="date">
+          <label for="campaign-image">Campaign Image URL:</label>
+          <input
+            type="text"
+            id="campaign-image"
+            name="profileSrc"
+            required
+          />
+          <label for="title">Campaign Name:</label>
+          <input type="text" id="campaign-name" name="title" required />
+          <label for="description">Campaign Description:</label>
+          <textarea
+            id="campaign-description"
+            name="description"
+            required
+          ></textarea>
+          <input type="submit" id="submit-campaign-btn" value="submit">
+          <input type="button" id="cancel-campaign-btn">Cancel</input>
+        </form>
+      </div>
+    </div>
+    <script>
+      // Select DOM elements
+      const addCampaignBtn = document.querySelector("#add-campaign-btn");
+      const popupContainer = document.querySelector("#popup-container");
+      const addCampaignForm = document.querySelector("#add-campaign-form");
+      const campaignsCards = document.querySelector(".campaigns-cards");
+
+      
+
+      // Show popup when "Add Campaign" button is clicked
+      addCampaignBtn.addEventListener("click", () => {
+        popupContainer.style.display = "flex";
+      });
+
+      // Hide popup when "Cancel" button is clicked
+      document
+        .querySelector("#cancel-campaign-btn")
+        .addEventListener("click", () => {
+          popupContainer.style.display = "none";
+        });
+
+      // Add new campaign card when form is submitted
+      addCampaignForm.addEventListener("submit", (event) => {
+
+        // Get form input values
+        const campaignImage = document.querySelector("#campaign-image").value;
+        const campaignName = document.querySelector("#campaign-name").value;
+        const campaignDescription = document.querySelector(
+          "#campaign-description"
+        ).value;
+
+        // Create new campaign card element
+        const card = document.createElement("div");
+        card.classList.add("card");
+        const img = document.createElement("img");
+        img.src = campaignImage;
+        img.alt = campaignName;
+        card.appendChild(img);
+        const h3 = document.createElement("h3");
+        h3.textContent = campaignName;
+        card.appendChild(h3);
+        const p = document.createElement("p");
+        p.textContent = campaignDescription;
+        card.appendChild(p);
+
+        // Add new card to campaigns container
+        campaignsCards.appendChild(card);
+
+        // Hide popup
+        popupContainer.style.display = "none";
+
+        // Reset form
+        addCampaignForm.reset();
+      });
+      ``;
+    </script>
+  </body>
+</html>

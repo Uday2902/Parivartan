@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NGO</title>
+  <!-- ................CUSTOM CSS LINK................... -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+
+
+
+  <style>
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-transform: capitalize;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      list-style: none;
+      text-decoration: none;
+      border: none;
+      outline: none;
+    }
+
+    :root {
+      --color-white: hsl(252, 30%, 100%);
+      --color-light: hsl(252, 30%, 95%);
+      --color-gry: rgb(160, 151, 190);
+      --color-primary: hsl(252, 75%, 60%);
+      --color-success: hsl(120, 95%, 65%);
+      --color-danger: hsl(0, 95%, 65%);
+      --color-dark: hsl(252, 30%, 17%);
+      --color-black: hsl(252, 30%, 10%);
+
+
+      --btn-padding: .6rem 2rem;
+      --border-radius: 50px;
+      --card-border-radius: 20px;
+      --search-padding: .6rem 2rem;
+      --card-padding: 1rem;
+
+      --stk-top-left: 5.4rem;
+      --stk-top-right: -18rem;
+    }
+
+    body {
+      color: var(--color-dark);
+      background: var(--color-light);
+      overflow-x: hidden;
+      line-height: 10px;
+      letter-spacing: 0.08ch;
+    }
+
+    /* ............CUSTOM STYLE........ */
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .profile-phots {
+      width: 2.7rem;
+      border-radius: 50%;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    .icon1 {
+      height: 1.4rem;
+      width: 1.4rem;
+    }
+
+    .icon2 {
+      height: 1.2rem;
+      width: 1.2rem;
+    }
+
+    .btn {
+      padding: var(--btn-padding);
+      display: inline-block;
+      font-weight: 500;
+      font-size: .9rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      opacity: .8;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .btn-danger {
+      background: var(--color-danger);
+      color: white;
+    }
+
+    .text-blod {
+      font-weight: bold;
+    }
+
+    .text-gry {
+      color: var(--color-gry);
+    }
+
+    /* ............................NAV START.................... */
+    /*nav{
+      position: fixed;
+      width: 100%;
+      padding: .7rem 0;
+      background: var(--color-white);
+      z-index: 10;
+      top: 0;
+  }
+  
+  .nav-container{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  }
+  
+  nav span{
+      color: var(--color-primary);
+  }
+  nav .logo{
+      color: var(--color-danger);
+  }*/
+
+    .search-bar {
+      background: var(--color-light);
+      border-radius: var(--border-radius);
+      padding: var(--search-padding);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .search-bar input[type="search"] {
+      width: 30vw;
+      margin-left: 1rem;
+      font-size: .9rem;
+      color: var(--color-dark);
+      background: transparent;
+      text-transform: lowercase;
+    }
+
+    .search-bar input[type="search"]::placeholder {
+      color: var(--color-gry);
+    }
+
+    .create {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav {
+      position: fixed;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      height: 5vw;
+      align-items: center;
+      z-index: 999;
+      background-color: #fff;
+      box-shadow: 0 0 10px 0px #333;
+    }
+
+    nav img {
+      width: unset;
+      position: relative;
+      background-color: #666;
+      color: #000;
+      height: 75px;
+      width: 140px;
+      /* border-radius: 30px; */
+      margin-left: 50px;
+      margin-top: 0px;
+    }
+
+    nav .navigation ul {
+      display: flex;
+      justify-content: flex-end;
+      text-align: center;
+    }
+
+    nav .navigation ul li {
+      list-style: none;
+      padding: 10px;
+      margin: 0 1vw;
+    }
+
+    nav .navigation ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    /* ............................NAV END.................... */
+
+
+    /* ............................START MAINE .................... */
+
+    main {
+      position: relative;
+      top: 5.4rem;
+    }
+
+    .main-container {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 20vw;
+      gap: 2rem;
+    }
+
+    /*.... main left... */
+    .main-container .main-left {
+      position: sticky;
+      height: max-content;
+      top: var(--stk-top-left);
+    }
+
+    .main-left .profile {
+      padding: var(--card-padding);
+      background: var(--color-white);
+      border-radius: var(--card-border-radius);
+      display: flex;
+      column-gap: 1rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    .main-left p {
+      text-transform: lowercase;
+      font-size: .9rem;
+    }
+
+    /* +++++++++++  SIDEBAR  +++++++++++++++++ */
+    .main-left .side-bar {
+      background: var(--color-white);
+      margin-top: 1rem;
+      border-radius: var(--card-border-radius);
+    }
+
+    .menu-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: .3s all ease;
+      height: 4rem;
+    }
+
+    .menu-item:hover {
+      background: var(--color-light);
+    }
+
+    .menu-item span img {
+      margin-left: 2rem;
+      position: relative;
+    }
+
+    .menu-item .count {
+      background: var(--color-danger);
+      padding: .1rem .4rem;
+      font-size: .6rem;
+      height: fit-content;
+      color: white;
+      border-radius: .8rem;
+      position: absolute;
+      top: .5rem;
+      left: 2.8rem;
+    }
+
+    .menu-item h3 {
+      font-size: 1rem;
+      margin-left: 1.5rem;
+    }
+
+    .active h3 {
+      color: var(--color-primary);
+    }
+
+    .active {
+      background: var(--color-light);
+    }
+
+    .menu-item.active::before {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 100%;
+      width: .5rem;
+      background: var(--color-primary);
+    }
+
+    .menu-item:first-child.active {
+      border-top-left-radius: var(--card-border-radius);
+      overflow: hidden;
+    }
+
+    .g {
+      border-bottom-left-radius: var(--card-border-radius);
+      overflow: hidden;
+    }
+
+    .side-bar .btn {
+      margin-top: 1rem;
+      width: 100%;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    /* +++++++++++  SIDEBAR  +END++++++++++++++++ */
+
+    /* ...........notification..start......... */
+    .notification {
+      position: absolute;
+      background: var(--color-white);
+      width: 30rem;
+      border-radius: var(--card-border-radius);
+      top: 0;
+      left: 110%;
+      padding: var(--card-padding);
+      box-shadow: 0 0 2rem hsl(var(--color-primary)75% 60% 25%);
+      z-index: 8;
+      display: none;
+    }
+
+    .notification::before {
+      content: '';
+      height: 1.2rem;
+      width: 1.2rem;
+      background: var(--color-white);
+      display: block;
+      position: absolute;
+      transform: rotate(45deg);
+      left: -.6rem;
+    }
+
+    .notification .NP {
+      display: flex;
+      align-items: start;
+      gap: 1rem;
+      margin: 1rem;
+    }
+
+    .notification .NP small {
+      display: block;
+    }
+
+    /* ...........notification..end......... */
+
+
+    /* ...........mid..start......... */
+    .storys {
+      height: 12rem;
+      display: flex;
+      justify-content: space-between;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+
+    .story {
+      position: relative;
+      justify-content: space-between;
+      display: flex;
+      padding: var(--card-padding);
+      border-radius: var(--card-border-radius);
+      flex-direction: column;
+      color: var(--color-white);
+      overflow: hidden;
+      /* width: 5rem; */
+      width: 100%;
+      align-items: left;
+      background: var(--color-primary);
+      font-size: .7rem;
+    }
+
+    .story::before {
+      content: '';
+      height: 4rem;
+      width: 100%;
+      display: block;
+      background: linear-gradient(transparent, var(--color-primary));
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .story .profile-phots {
+      height: 2rem;
+      width: 2rem;
+      align-self: start;
+      border: 2px dotted var(--color-primary);
+    }
+
+    .story p {
+      z-index: 2;
+    }
+
+    /* ...........mid..end......... */
+
+
+    /* ...........form..start......... */
+
+    .feed-phots img:hover {
+      transition: all 1s;
+      /* transform: scale(1.2); */
+
+    }
+
+    .creatPost {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: var(--border-radius);
+      padding: .4rem var(--card-padding);
+      background: var(--color-white);
+
+    }
+
+    .creatPost .text-post {
+      background: transparent;
+      justify-self: start;
+      width: 100%;
+      padding-left: 1rem;
+      margin-right: 1rem;
+
+    }
+
+    .creatPost input[type="text"] {
+      color: var(--color-dark);
+    }
+
+    /* ...........form..end......... */
+
+    /* ...................feed start............ */
+    .feeds {
+      width: 100%;
+    }
+
+    .feeds .feed {
+      background: var(--color-white);
+      font-size: .8rem;
+      line-height: 1.6;
+      padding: var(--card-padding);
+      border-radius: var(--card-border-radius);
+      margin: 1rem 0;
+    }
+
+    .feeds .feed .head {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .feeds .feed .user {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .feeds .feed-phots {
+      /* overflow: hidden; */
+      border-radius: var(--card-border-radius);
+      margin: .7rem 0;
+    }
+
+    .feeds .feed-phots img {
+      border-radius: 20px;
+    }
+
+    .feeds .feed .caption .msg-btn {
+      text-align: right;
+      margin-top: -40px;
+    }
+
+    .feeds .feed .caption .msg-btn button {
+      padding: 0.5rem 1rem;
+      margin: 4px 0;
+      font-size: 1.1em;
+      color: var(--color-white);
+      background-color: var(--color-primary);
+      border-radius: 6px;
+      transition: 0.3s ease-in-out;
+      font-weight: 00;
+    }
+
+    .feeds .feed .caption .msg-btn button:hover {
+      cursor: pointer;
+      /* color: var(--color-black); */
+      outline: 2px solid #000;
+      outline-offset: -2px;
+    }
+
+
+    .feeds .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin: .6rem 0;
+      align-items: center;
+    }
+
+    .feeds .inter-action-button {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .liked-by {
+      display: flex;
+      margin-top: .8rem;
+    }
+
+    .liked-by span {
+      height: 1.4rem;
+      width: 1.4rem;
+      border: 2px solid var(--color-white);
+      border-radius: 50%;
+      display: block;
+      overflow: hidden;
+      margin-left: -.6rem;
+    }
+
+    .liked-by span:nth-child(1) {
+      margin: 0;
+    }
+
+    .liked-by p {
+      margin-left: .6rem;
+    }
+
+    .hash-teg {
+      color: var(--color-primary);
+    }
+
+    /* ...................feed end............ */
+
+
+    /* ..................maine right....................start......... */
+    /* ...message... */
+    .main-right {
+      height: max-content;
+      position: sticky;
+      /* width: 40%; */
+      top: var(--stk-top-right);
+      bottom: 0;
+    }
+
+    .main-right .messages {
+      background: var(--color-white);
+      border-radius: var(--card-border-radius);
+      padding: var(--card-padding);
+    }
+
+    .main-right .message-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .main-right .messages .search-bar {
+      margin-bottom: 1rem;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .main-right .messages .category {
+      display: flex;
+      justify-content: space-between;
+      /* align-items: center; */
+      margin-bottom: 1rem;
+    }
+
+    .main-right .messages .category h6 {
+      font-size: .8rem;
+      text-align: center;
+      border-bottom: 4px solid var(--color-light);
+      padding: .5rem;
+      width: 100%;
+    }
+
+    .main-right .messages .category .active {
+      border-color: var(--color-dark);
+    }
+
+    .main-right .message {
+      display: flex;
+      margin-bottom: 1rem;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .main-right .message:last-child {
+      margin: 0;
+    }
+
+    .main-right .message p {
+      font-size: .8rem;
+    }
+
+    .ac {
+      height: .9rem;
+      width: .9rem;
+      background: var(--color-success);
+      position: absolute;
+      border-radius: 50%;
+      border: var(--color-white) 2px solid;
+      bottom: 0;
+      right: 0;
+
+    }
+
+    .message .profile-phots {
+      position: relative;
+      overflow: visible;
+    }
+
+    .message .profile-phots img {
+      border-radius: 50%;
+      height: 100%;
+      width: 100%;
+      border: 2px solid var(--color-primary);
+    }
+
+    .message {
+      line-height: 1.1rem;
+    }
+
+    .message .messgae-body .msg-btn button {
+      padding: 6px 0.7rem;
+      margin: 4px 0;
+      font-size: 0.8rem;
+      color: var(--color-white);
+      background-color: var(--color-primary);
+      border-radius: 6px;
+      transition: 0.3s ease-in-out;
+      font-weight: 00;
+    }
+
+    .message .messgae-body .msg-btn button:hover {
+      cursor: pointer;
+      /* color: var(--color-black); */
+      outline: 1px double #333;
+    }
+
+
+
+    .pr-requst {
+      color: var(--color-primary);
+    }
+
+    /* firend requste */
+    .firend-requests {
+      margin-top: 1rem;
+    }
+
+    .firend-requests h4 {
+      color: var(--color-gry);
+      margin: .7rem 0;
+    }
+
+    .firend-requests .request {
+      background: var(--color-white);
+      padding: var(--card-padding);
+      border-radius: var(--card-border-radius);
+      margin-top: 1rem;
+    }
+
+    .firend-requests .info {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .firend-requests .info .request-body h5 {
+      color: var(--color-dark);
+    }
+
+    .firend-requests .info .action {
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* ..................maine right....................end......... */
+
+    /* ............................MAINE END.................... */
+
+
+    /*......................THEME CUSTOMIZE..START................... */
+    .theme {
+      background: rgba(0, 0, 0, 0.508);
+      height: 100vh;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(0, 0);
+      text-align: center;
+      display: grid;
+      place-items: center;
+      z-index: 100;
+      font-size: .9rem;
+      display: none;
+    }
+
+    .card {
+      background: var(--color-white);
+      padding: var(--card-padding);
+      border-radius: var(--card-border-radius);
+      width: 50%;
+    }
+
+    .font-siz {
+      margin-top: 3rem;
+    }
+
+    .font-siz>div {
+      display: flex;
+      justify-content: space-between;
+      background: var(--color-light);
+      border-radius: var(--card-border-radius);
+      padding: var(--search-padding);
+      align-items: center;
+    }
+
+    .choose-font-size {
+      width: 100%;
+      height: .2rem;
+      background: var(--color-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: auto .5rem;
+    }
+
+    .choose-font-size span {
+      height: 1rem;
+      width: 1rem;
+      background: var(--color-danger);
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .choose-font-size .active {
+      background: var(--color-primary);
+    }
+
+    .choose-font-size .font1 {
+      height: .9rem;
+      width: .9rem;
+    }
+
+    .choose-font-size .font2 {
+      height: 1rem;
+      width: 1rem;
+    }
+
+    .choose-font-size .font3 {
+      height: 1.2rem;
+      width: 1.2rem;
+    }
+
+    .choose-font-size .font4 {
+      height: 1.3rem;
+      width: 1.3rem;
+    }
+
+    .choose-font-size .font5 {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+
+    /* ..............color.......... */
+    .color {
+      margin-top: 2rem;
+    }
+
+    .choose-color {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: var(--search-padding);
+      border-radius: var(--card-border-radius);
+      background: var(--color-light);
+      margin: 1rem auto;
+    }
+
+    .choose-color span {
+      height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 50%;
+    }
+
+    .choose-color span:nth-child(1) {
+      background: hsl(0, 95%, 65%);
+    }
+
+    .choose-color span:nth-child(2) {
+      background: hsl(120, 95%, 65%);
+    }
+
+    .choose-color span:nth-child(3) {
+      background: hsl(252, 75%, 60%);
+    }
+
+    .choose-color span:nth-child(4) {
+      background: hsl(252, 30%, 17%);
+    }
+
+    .choose-color span:nth-child(5) {
+      background: hsl(252, 30%, 10%);
+    }
+
+    .choose-color .active {
+      border: 5px solid var(--color-gry);
+    }
+
+    /* ................backgournd............ */
+    .background {
+      margin-top: 2rem;
+    }
+
+    .chosse-backgorund {
+      display: flex;
+      justify-content: space-between;
+      width: 60%;
+      margin: 1rem auto;
+      padding: var(--search-padding);
+      border-radius: var(--card-border-radius);
+      align-items: center;
+    }
+
+    .chosse-backgorund>div {
+      height: 4rem;
+      width: 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--card-border-radius);
+      color: var(--color-white);
+      gap: .5rem;
+    }
+
+    .chosse-backgorund>div span {
+      height: 1.5rem;
+      width: 1.5rem;
+      border-radius: 50%;
+      border: 2px solid var(--color-gry);
+    }
+
+    .chosse-backgorund .active {
+      border: 3px solid var(--color-primary);
+    }
+
+    .chosse-backgorund>div:nth-child(1) {
+      background: hsl(252, 30%, 95%);
+      color: var(--color-black);
+    }
+
+    .chosse-backgorund>div:nth-child(2) {
+      background: hsl(252, 30%, 17%);
+    }
+
+    .chosse-backgorund>div:nth-child(3) {
+      background: hsl(0, 0%, 0%);
+    }
+
+    /*......................THEME CUSTOMIZE..END................... */
+
+
+
+
+
+    /*............................................ MEDA QUERY..START......................................... */
+    /*............................................ MEDA QUERY..START......................................... */
+
+    /* LEPTOP */
+    /* @media (max-width:1220px) {    
+      .container{
+          width: 96%;
+      } 
+      .main-container{      
+          grid-template-columns: 5rem auto 30vw;
+          gap: 1rem;
+      }
+      .main-left{
+          width: 5rem;
+          z-index: 5;
+      }
+      .main-left .profile{
+          display: none;
+      }
+      .main-left .menu-item h3{
+          display: none;
+      }
+      .side-bar label{
+          display: none;
+      }
+      .card{
+          width: 80%;
+      }
+      
+  }
+  
+  TABLET  and PHONE
+  @media (max-width:991px) {
+      .container{
+          gap: 0;
+      }
+       nav .search-bar{
+          display: none;
+       }
+       .main-container{      
+          grid-template-columns: 0 auto 5rem;
+          gap: 1rem;
+      }
+      .main-left{
+          grid-column: 3/4;
+          position: fixed;
+          bottom: 0;
+          right: 0;
+      }
+      notifiation
+      .notification{
+          position: absolute;  
+          left: -21rem;
+          width: 20rem;
+      }
+      .notification::before{
+          display: none;
+      }
+      mid
+      .main-mid{
+          grid-column: 1/3;
+          margin-top: -34rem;
+      }
+      .main-right{
+          display: none;
+      }   
+      .chosse-backgorund{       
+          width: 80%;     
+      } 
+      .card{
+          width: 90%;
+      }
+  }
+  @media (max-width:573px) {
+      .storys{
+        gap: .4rem;
+      }
+  } */
+
+    /*............................................ MEDA QUERY..END......................................... */
+    /*............................................ MEDA QUERY..END......................................... */
+
+
+
+    /* ...........EXTRA JS CLASS............ */
+    /* MESSAGE CLASS */
+    .box-sh {
+      box-shadow: 0 0 1rem var(--color-primary);
+    }
+  </style>
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body ng-app="myApp" ng-controller="dataCtrl">
+  <!-- .............START NAV SECTION...................... -->
+  <!-- <nav>
+        <div class="container nav-container">
+            <h2 class="logo">
+                social<span>book</span>
+            </h2>
+            <div class="search-bar">
+                <img src="icon/search.svg" class="icon2">
+                <input type="search" placeholder="search for creater..." ng-model="searchFeed">
+            </div>
+            <div class="create">
+                <label for="creatPost" class="btn btn-primary">update</label>
+                <div class="profile-phots">
+                    <img src="img/profile-1.jpeg" alt="">
+                </div>
+            </div>
+        </div>
+    </nav> -->
+  <nav>
+    <img src="img/facebook_cover_photo_1.png" alt="Logo">
+    <div class="navigation">
+      <ul>
+        <!-- <i id="menu-close" class="fas fa-times"></i> -->
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="#">About Us</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <!-- <li><a href="#">Courses</a></li> -->
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+      <!-- <img src="images/menu.png" id="menu-btn" alt=""> -->
+    </div>
+  </nav>
+  <!-- ................END NAV SECTION......................... -->
+  <!-- ................START MAINE SECTION......................... -->
+  <main>
+    <div class="container main-container" id="container">
+
+      <!-- =======MAIN MID======= -->
+      <div class="main-mid">
+
+        <!-- storys..start.. -->
+
+        <!-- <div class="storys">
+                    <div class="story" ng-repeat="currentStory in storyData"
+                        ng-style="{'background-image':'url('+currentStory.backgroundImage + ')','background-size':'cover','background-position':'center'}">
+                        <div class="profile-phots">
+                            <img src={{currentStory.src}} alt="">
+                        </div>
+                        <p>{{currentStory.storyTitle}}</p>
+                    </div>
+                </div>
+
+                 storys..end.. -->
+
+        <!-- <form class="creatPost">
+                    <div class="profile-phots">
+                        <img src="img/profile-1.jpeg" alt="">
+                    </div>
+                    <div class="text-post">
+                        <input type="text" placeholder="whast's on your mind?" class="creatPost" >
+                    </div>
+
+                    <div>
+                        <input type="submit" value="post" class="btn btn-primary">
+                    </div>
+                </form>  -->
+
+
+        <div class="search-bar">
+          <img src="icon/search.svg" class="icon2">
+          <input type="search" placeholder="search for creater..." ng-model="searchFeed">
+        </div>
+
+        <!--..................feeds..start...............................-->
+        <div class="feeds">
+          <div class="feed" ng-repeat="currentFeed in feedData | filter:searchFeed">
+            <div class="head">
+              <div class="user">
+                <div class="profile-phots">
+                  <img src={{currentFeed.profileSrc}} alt="">
+                </div>
+                <div class="info">
+                  <h3>{{currentFeed.name}}</h3>
+                  <small>canada, 15 minutes ago</small>
+                </div>
+              </div>
+              <span class="edit">
+                <img src="icon/three-dots.svg" class="icon1">
+              </span>
+            </div>
+            <div class="feed-phots">
+              <img src={{currentFeed.feedSrc}} alt="">
+            </div>
+            <div class="action-buttons">
+              <div class="inter-action-button">
+                <span><img src="icon/heart.svg" class="icon2"></span>
+                <span><img src="icon/chat-dots.svg" class="icon2"></span>
+                <span><img src="icon/share.svg" class="icon2"></span>
+              </div>
+              <div class="book-mark">
+                <span><img src="icon/bookmark.svg" class="icon2"></span>
+              </div>
+            </div>
+            <div class="liked-by">
+              <span><img src="img/p2.jpg" alt=""></span>
+              <span><img src="img/p4.png" alt=""></span>
+              <span><img src="img/p5.png" alt=""></span>
+              <p>like by <b>deniel rivar </b> and<b> 105 others pepoles</b></p>
+            </div>
+            <div class="caption">
+              <p>Total <span style="font-weight: 700;">30000</span> registered Participant</p>
+              <!-- <p><b>angela rose</b>Lorem, ipsum dolor sit amet consectetur. <span
+                                    class="hash-teg">#lifestyle</span></p> -->
+              <div class="msg-btn">
+                <button>Register for free</button>
+              </div>
+            </div>
+            <div class="text-gry comment">view all comments</div>
+
+          </div>
+        </div>
+        <!--..................feeds.end................................-->
+      </div>
+      <!-- =======MAIN RIGHT======= -->
+      <div class="main-right">
+        <div class="messages" id="message-box">
+          <div class="message-heading">
+            <h4>message</h4><span><img src="icon/pencil-square.svg" class="icon1"></span>
+          </div>
+          <!-- searchbar -->
+          <div class="search-bar">
+            <span><img src="icon/search.svg" class="icon2"></span>
+            <input type="search" placeholder="search message" class="message-search" ng-model="searchMessage">
+          </div>
+          <!-- messagecategory -->
+          <div class="category">
+            <h6 class="active">firends</h6>
+            <h6 class="">followrs</h6>
+            <h6 class="pr-requst">request(4)</h6>
+          </div>
+          <!-- messgae -->
+
+          <div class="message" ng-repeat="currentMessage in messageData | filter:searchMessage">
+            <div class="profile-phots">
+              <div class={{currentMessage.active}}></div>
+              <img src={{currentMessage.src}} alt="">
+            </div>
+            <div class="messgae-body">
+              <h5>{{currentMessage.name}}</h5>
+              <p class="text-gry">{{currentMessage.description}}</p>
+              <div class="msg-btn">
+                <button>Apply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <!--firend request-->
+        <!-- <div class="firend-requests">
+                    <h4>request</h4>
+                    <div class="request" ng-repeat="currentRequest in requestData">
+                        <div class="info">
+                            <div class="profile-phots">
+                                <img src={{currentRequest.requestProfileSrc}} alt="">
+                            </div>
+                            <div class="request-body">
+                                <h5>{{currentRequest.name}}</h5>
+                                <p class="text-gry">10 mutual firend</p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-primary add" onclick="acceptClick(this)">accept</button>
+                            <button class="btn btn del" onclick="delClick(this)">delete</button>
+                        </div>
+                    </div>
+                </div> -->
+
+
+
+      </div>
+    </div>
+  </main>
+
+  <!--................. THEME CUSTOMIZE.START............. -->
+  <div class="theme">
+    <div class="card">
+      <h2>CUSTOMIZE yuor site</h2>
+      <p class="text-gry">manage your font, color, and backgroud</p>
+      <!--........... FONT-SIZE........... -->
+      <div class="font-siz">
+        <div>
+          <h6>aa</h6>
+          <div class="choose-font-size">
+            <span class="font1"></span>
+            <span class="font2 active"></span>
+            <span class="font3"></span>
+            <span class="font4"></span>
+            <span class="font5"></span>
+          </div>
+          <h3>aa</h3>
+        </div>
+      </div>
+
+      <!--.................. COLOR................ -->
+      <div class="color">
+        <h3>color</h3>
+        <div class="choose-color">
+          <span class="color1"></span>
+          <span class="color2"></span>
+          <span class="color3 active"></span>
+          <span class="color4"></span>
+          <span class="color5"></span>
+        </div>
+      </div>
+
+      <!--.............BACKGROUND.............. -->
+      <div class="background">
+        <h3>backgorund</h3>
+        <div class="chosse-backgorund">
+          <div class="bg1 active">
+            <span></span>
+            <h5 class="bg1">light</h5>
+          </div>
+          <div class="bg2">
+            <span></span>
+            <h5 class="bg2">dark</h5>
+          </div>
+          <div class="bg3">
+            <span></span>
+            <h5 class="bg3">black</h5>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!--.............THEME CUSTOMIZE.END...... -->
+  <!-- ................END MAINE SECTION......................... -->
+  <!-- .............CUSTOM JS LINK...................... -->
+  <script>
+    //..................AngularJs...................
+
+const app = angular.module('myApp',[]);
+app.controller('dataCtrl',function($scope){
+    $scope.storyData = [
+        {
+            src:"img/profile-1.jpg",
+            storyTitle:"your story",
+            backgroundImage: "img/st1.jpg"
+        },
+        {
+            src:"img/s2.jpg",
+            storyTitle:"jami sia",
+            backgroundImage: "img/st2.jpg"
+        },
+        {
+            src:"img/s3.jpg",
+            storyTitle:"newton",
+            backgroundImage: "img/st3.jpg"
+        },
+        {
+            src:"img/s4.jpg",
+            storyTitle:"lana fox",
+            backgroundImage: "img/st4.jpg"
+        },
+        {
+            src:"img/s5.jpg",
+            storyTitle:"albart joj",
+            backgroundImage: "img/st5.jpg"
+        },
+        {
+            src:"img/s6.jpg",
+            storyTitle:"devid mark",
+            backgroundImage: "img/st6.jpg"
+        }
+    ]
+
+    $scope.messageData = [
+        {
+            src:"img/f3.png",
+            name:"lion mesi",
+            description:"Hey this is lion mesi",
+            active: "nac"
+        },
+        {
+            src:"img/m1.jpg",
+            name:"emaly wills",
+            description:"Hey this is emaly wills",
+            active: "nac"
+        },
+        {
+            src:"img/m2.png",
+            name:"dani liza",
+            description:"Hey this is deni liza",
+            active: "ac"
+        },
+        {
+            src:"img/m3.jpg",
+            name:"prince jhoo",
+            description:"Hey this is prince jhoo",
+            active: "nac"
+        },
+        {
+            src:"img/m4.png",
+            name:"daniel river",
+            description:"Hey this is daniel river",
+            active: "ac"
+        },
+    ]
+
+    $scope.feedData = [
+        {
+            profileSrc:"img/p7.png",
+            name:"abc",
+            feedSrc:"img/feed1.jpg"
+        },
+        {
+            profileSrc:"img/p5.png",
+            name:"pqr",
+            feedSrc:"img/feed8.jpg"
+        },
+        {
+            profileSrc:"img/feed4.jpg",
+            name:"xyz",
+            feedSrc:"img/feed4.jpg"
+        },
+        {
+            profileSrc:"img/p2.jpg",
+            name:"dfg",
+            feedSrc:"img/feed3.png"
+        },
+        {
+            profileSrc:"img/s1.jpg",
+            name:"uio",
+            feedSrc:"img/feed2.jpg"
+        },
+        {
+            profileSrc:"img/profile-4.jpg",
+            name:"rty",
+            feedSrc:"img/feed6.png"
+        },
+        {
+            profileSrc:"img/p3.png",
+            name:"hdd",
+            feedSrc:"img/feed7.jpg"
+        },
+        {
+            profileSrc:"img/s7.jpg",
+            name:"tyu",
+            feedSrc:"img/feed5.jpg"
+        },
+    ]
+
+    $scope.requestData = [
+        {
+            requestProfileSrc:"img/f1.png",
+            name: "adam fight",
+            id:0
+        },
+        {
+            requestProfileSrc:"img/f2.png",
+            name: "black adam",
+            id:1
+        },
+        {
+            requestProfileSrc:"img/s3.jpg",
+            name: "alex jnoy",
+            id:2
+        },
+        {
+            requestProfileSrc:"img/f3.png",
+            name: "eval milk",
+            id:3
+        },
+        {
+            requestProfileSrc:"img/f4.png",
+            name: "dude putin",
+            id:4
+        },
+    ]
+
+    $scope.notificationData = [
+        {
+            src: "imgg/p2.jpg",
+            name: "melody",
+            timing: "1 minute ago"
+        },
+        {
+            src: "imgg/p3.png",
+            name: "jhon lew",
+            timing: "10 minute ago"
+        },
+        {
+            src: "imgg/p4.png",
+            name: "leah pry",
+            timing: "1 hour ago"
+        },
+        {
+            src: "imgg/p5.png",
+            name: "david",
+            timing: "1 day ago"
+        },
+        {
+            src: "imgg/profile-4.jpg",
+            name: "angla fox",
+            timing: "2 days ago"
+        },
+        {
+            src: "imgg/profile-5.jpeg",
+            name: "lana",
+            timing: "1 week ago"
+        },
+        {
+            src: "imgg/p7.png",
+            name: "mark newton",
+            timing: "2 months ago"
+        },
+    ]
+});
+
+//............SIDEBAR..........
+//............SIDEBAR..........
+const menuItem = document.querySelectorAll('.menu-item');
+
+
+// remove active classlist.....
+const removeActive = ()=>{
+    menuItem.forEach(item => {
+        item.classList.remove('active')        
+    });
+ }
+
+// add active classlist.....
+menuItem.forEach(item => {
+    item.addEventListener('click',()=>{
+        removeActive();
+        item.classList.add('active');
+
+        if(item.id != 'notifice'){
+            document.querySelector('.notification').style.display ='none'
+        }else{
+            document.querySelector('.notification').style.display ='block' 
+            document.querySelector('#notifice .count').style.display='none'
+        }
+    })
+})
+
+
+//....................MESSAGE................
+//....................MESSAGE................
+const message = document.querySelector('#message');
+const messageBox = document.querySelector('#message-box');
+
+message.addEventListener('click',()=>{
+
+    messageBox.classList.add('box-sh');
+    message.querySelector('.count').style.display='none'
+
+
+    setTimeout(() => {
+        messageBox.classList.remove('box-sh');
+    }, 2000);
+
+})
+
+// ...................THEME CUSTOMIZTION......
+// ............THEME CUSTOMIZTION......
+
+const themeMenu = document.querySelector('#themeMenu');
+const themBOx = document.querySelector('.theme')
+
+
+themeMenu.addEventListener('click',()=>{
+    themBOx.style.display= 'grid'
+})
+
+// FIREND RQUEST BUTTON..............
+function acceptClick(element){
+    element.parentElement.style.display = "none";
+}
+        
+function delClick(element){
+    element.parentElement.parentElement.style.display = "none";
+}
+
+
+// WINDOW EVENT.....
+window.addEventListener('scroll',()=>{
+    themBOx.style.display= 'none'
+    document.querySelector('.notification').style.display ='none'
+})
+  </script>
+</body>
+
+</html>
